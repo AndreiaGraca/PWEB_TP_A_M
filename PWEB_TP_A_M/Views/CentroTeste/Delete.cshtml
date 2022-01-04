@@ -1,0 +1,83 @@
+﻿@model PWEB_TP_A_M.Models.CentroTeste
+
+@{
+    ViewData["Title"] = "Delete";
+}
+
+<h1>Apagar Centro de Teste</h1><br />
+
+<h4>Tem a certeza que pretende Eliminar um Centro de Teste?</h4><br />
+<body>
+<div>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Nome)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Nome)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Vagas)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Vagas)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Localidade)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Localidade)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Horario)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Horario)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.LimTestes)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.LimTestes)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Tecnico)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Tecnico)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Analises)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Analises.Id)
+        </dd class>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.LocalidadeId)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.LocalidadeId)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.TecnicosId)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.TecnicosId)
+        </dd>
+    </dl>
+    <br />
+
+    <form asp-action="Delete">
+        <input type="hidden" asp-for="Id" />
+        <input type="submit" value="Delete" class="btn btn-danger" /> <br /> <br />
+        <a asp-action="Index">Voltar atrás</a>
+    </form>
+</div>
+</body>
+
+<style>
+    body {
+        background-image: linear-gradient(white,LightCyan);
+    }
+</style>

@@ -1,0 +1,127 @@
+﻿@model IEnumerable<PWEB_TP_A_M.Models.CentroTeste>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Lista de Centros de Teste</h1>
+<br />
+
+<p>
+    <a asp-action="Create" class="btn btn-secondary">Create New</a>
+</p>
+<br />
+
+<style>
+    body {
+        background-image: linear-gradient(white,LightCyan);
+    }
+</style>
+
+<body>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.Nome)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Vagas)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Localidade)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Horario)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.LimTestes)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Tecnico)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Analises)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.LocalidadeId)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.TecnicosId)
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Nome)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Vagas)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Localidade)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Horario)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.LimTestes)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Tecnico)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Analises.Tipo)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.LocalidadeId)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.TecnicosId)
+                    </td>
+                    <td>
+                        <div class="dropdown">
+                            <button class="btn btn-outline-secondary" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Opções
+                            </button>
+                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                <a asp-action="Edit" asp-route-id="@item.Id" class="dropdown-item " onmouseover="myFunction(this)" onmouseout="myFunctionAA(this)">Edit</a>
+                                <a asp-action="Details" asp-route-id="@item.Id" class="dropdown-item" onmouseover="myFunction(this)" onmouseout="myFunctionAA(this)">Details</a>
+                                <a asp-action="Delete" asp-route-id="@item.Id" class="dropdown-item" onmouseover="myFunction(this)" onmouseout="myFunctionAA(this)">Delete</a>
+                            </div>
+                            <style>
+                                tr {
+                                    border-bottom: 1px solid #ddd;
+                                }
+
+                                    tr:hover {
+                                        background-color: #f0f0f5;
+                                    }
+
+                                .dropdown:hover .dropdown-menu {
+                                    display: block;
+                                    margin-top: 0;
+                                }
+                            </style>
+                            <script>
+                                function myFunction(x) {
+                                    x.style.background = "LightBlue";
+
+                                }
+
+                                function myFunctionAA(x) {
+                                    x.style.background = "white";
+                                }
+                            </script>
+                        </div>
+
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</body>
