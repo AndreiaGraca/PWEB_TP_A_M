@@ -8,6 +8,10 @@ namespace PWEB_TP_A_M.Models
     public class Analises
     {
         public int Id { get; set; }
-        public String Tipo { get; set; }
+
+        public string TipoAnalise { get; set; }
+        public string NomeAnalise { get; set; }
+
+        public string Resultados { get; set; }
     }
 }

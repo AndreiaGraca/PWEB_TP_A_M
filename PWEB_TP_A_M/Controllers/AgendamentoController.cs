@@ -10,22 +10,23 @@ using PWEB_TP_A_M.Models;
 
 namespace PWEB_TP_A_M.Controllers
 {
-    public class AnaliseController : Controller
+    public class AgendamentoController : Controller
     {
         private readonly TpCodeFirstDbContext _context;
 
-        public AnaliseController(TpCodeFirstDbContext context)
+        public AgendamentoController(TpCodeFirstDbContext context)
         {
             _context = context;
         }
 
-        // GET: Analises
+        // GET: Agendamento
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Analises.ToListAsync());
+            var tpCodeFirstDbContext = _context.Agendamento.Include(a => a.Testes);
+            return View(await tpCodeFirstDbContext.ToListAsync());
         }
 
-        // GET: Analises/Details/5
+        // GET: Agendamento/Details/5
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -33,40 +34,42 @@ namespace PWEB_TP_A_M.Controllers
                 return NotFound();
             }
 
-            var analises = await _context.Analises
+            var agendamento = await _context.Agendamento
+                .Include(a => a.Testes)
                 .FirstOrDefaultAsync(m => m.Id == id);
-            if (analises == null)
+            if (agendamento == null)
             {
                 return NotFound();
             }
 
-            return View(analises);
+            return View(agendamento);
         }
 
-        // GET: Analises/Create
+        // GET: Agendamento/Create
         public IActionResult Create()
         {
-            ViewData["AnalisesId"] = new SelectList(_context.Analises, "Id", "Tipo");
+            ViewData["TestesId"] = new SelectList(_context.Set<Testes>(), "Id", "Id");
             return View();
         }
 
-        // POST: Analises/Create
+        // POST: Agendamento/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,TipoAnalise,NomeAnalise,Resultados")] Analises analises)
+        public async Task<IActionResult> Create([Bind("Id,TipoAgendamentoNo,CentroId,TestesId,AnaliseId")] Agendamento agendamento)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(analises);
+                _context.Add(agendamento);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            return View(analises);
+            ViewData["TestesId"] = new SelectList(_context.Set<Testes>(), "Id", "Id", agendamento.TestesId);
+            return View(agendamento);
         }
 
-        // GET: Analises/Edit/5
+        // GET: Agendamento/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -74,22 +77,23 @@ namespace PWEB_TP_A_M.Controllers
                 return NotFound();
             }
 
-            var analises = await _context.Analises.FindAsync(id);
-            if (analises == null)
+            var agendamento = await _context.Agendamento.FindAsync(id);
+            if (agendamento == null)
             {
                 return NotFound();
             }
-            return View(analises);
+            ViewData["TestesId"] = new SelectList(_context.Set<Testes>(), "Id", "Id", agendamento.TestesId);
+            return View(agendamento);
         }
 
-        // POST: Analises/Edit/5
+        // POST: Agendamento/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,TipoAnalise,NomeAnalise,Resultados")] Analises analises)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,TipoAgendamentoNo,CentroId,TestesId,AnaliseId")] Agendamento agendamento)
         {
-            if (id != analises.Id)
+            if (id != agendamento.Id)
             {
                 return NotFound();
             }
@@ -98,12 +102,12 @@ namespace PWEB_TP_A_M.Controllers
             {
                 try
                 {
-                    _context.Update(analises);
+                    _context.Update(agendamento);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!AnalisesExists(analises.Id))
+                    if (!AgendamentoExists(agendamento.Id))
                     {
                         return NotFound();
                     }
@@ -114,10 +118,11 @@ namespace PWEB_TP_A_M.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            return View(analises);
+            ViewData["TestesId"] = new SelectList(_context.Set<Testes>(), "Id", "Id", agendamento.TestesId);
+            return View(agendamento);
         }
 
-        // GET: Analises/Delete/5
+        // GET: Agendamento/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -125,30 +130,31 @@ namespace PWEB_TP_A_M.Controllers
                 return NotFound();
             }
 
-            var analises = await _context.Analises
+            var agendamento = await _context.Agendamento
+                .Include(a => a.Testes)
                 .FirstOrDefaultAsync(m => m.Id == id);
-            if (analises == null)
+            if (agendamento == null)
             {
                 return NotFound();
             }
 
-            return View(analises);
+            return View(agendamento);
         }
 
-        // POST: Analises/Delete/5
+        // POST: Agendamento/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var analises = await _context.Analises.FindAsync(id);
-            _context.Analises.Remove(analises);
+            var agendamento = await _context.Agendamento.FindAsync(id);
+            _context.Agendamento.Remove(agendamento);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
-        private bool AnalisesExists(int id)
+        private bool AgendamentoExists(int id)
         {
-            return _context.Analises.Any(e => e.Id == id);
+            return _context.Agendamento.Any(e => e.Id == id);
         }
     }
 }

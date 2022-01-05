@@ -10,22 +10,22 @@ using PWEB_TP_A_M.Models;
 
 namespace PWEB_TP_A_M.Controllers
 {
-    public class AnaliseController : Controller
+    public class TecnicoController : Controller
     {
         private readonly TpCodeFirstDbContext _context;
 
-        public AnaliseController(TpCodeFirstDbContext context)
+        public TecnicoController(TpCodeFirstDbContext context)
         {
             _context = context;
         }
 
-        // GET: Analises
+        // GET: Tecnico
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Analises.ToListAsync());
+            return View(await _context.Tecnicos.ToListAsync());
         }
 
-        // GET: Analises/Details/5
+        // GET: Tecnico/Details/5
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -33,40 +33,39 @@ namespace PWEB_TP_A_M.Controllers
                 return NotFound();
             }
 
-            var analises = await _context.Analises
+            var tecnicos = await _context.Tecnicos
                 .FirstOrDefaultAsync(m => m.Id == id);
-            if (analises == null)
+            if (tecnicos == null)
             {
                 return NotFound();
             }
 
-            return View(analises);
+            return View(tecnicos);
         }
 
-        // GET: Analises/Create
+        // GET: Tecnico/Create
         public IActionResult Create()
         {
-            ViewData["AnalisesId"] = new SelectList(_context.Analises, "Id", "Tipo");
             return View();
         }
 
-        // POST: Analises/Create
+        // POST: Tecnico/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,TipoAnalise,NomeAnalise,Resultados")] Analises analises)
+        public async Task<IActionResult> Create([Bind("Id,Nome,Especialidade,IdAgendamento")] Tecnicos tecnicos)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(analises);
+                _context.Add(tecnicos);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            return View(analises);
+            return View(tecnicos);
         }
 
-        // GET: Analises/Edit/5
+        // GET: Tecnico/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -74,22 +73,22 @@ namespace PWEB_TP_A_M.Controllers
                 return NotFound();
             }
 
-            var analises = await _context.Analises.FindAsync(id);
-            if (analises == null)
+            var tecnicos = await _context.Tecnicos.FindAsync(id);
+            if (tecnicos == null)
             {
                 return NotFound();
             }
-            return View(analises);
+            return View(tecnicos);
         }
 
-        // POST: Analises/Edit/5
+        // POST: Tecnico/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,TipoAnalise,NomeAnalise,Resultados")] Analises analises)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Nome,Especialidade,IdAgendamento")] Tecnicos tecnicos)
         {
-            if (id != analises.Id)
+            if (id != tecnicos.Id)
             {
                 return NotFound();
             }
@@ -98,12 +97,12 @@ namespace PWEB_TP_A_M.Controllers
             {
                 try
                 {
-                    _context.Update(analises);
+                    _context.Update(tecnicos);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!AnalisesExists(analises.Id))
+                    if (!TecnicosExists(tecnicos.Id))
                     {
                         return NotFound();
                     }
@@ -114,10 +113,10 @@ namespace PWEB_TP_A_M.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            return View(analises);
+            return View(tecnicos);
         }
 
-        // GET: Analises/Delete/5
+        // GET: Tecnico/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -125,30 +124,30 @@ namespace PWEB_TP_A_M.Controllers
                 return NotFound();
             }
 
-            var analises = await _context.Analises
+            var tecnicos = await _context.Tecnicos
                 .FirstOrDefaultAsync(m => m.Id == id);
-            if (analises == null)
+            if (tecnicos == null)
             {
                 return NotFound();
             }
 
-            return View(analises);
+            return View(tecnicos);
         }
 
-        // POST: Analises/Delete/5
+        // POST: Tecnico/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var analises = await _context.Analises.FindAsync(id);
-            _context.Analises.Remove(analises);
+            var tecnicos = await _context.Tecnicos.FindAsync(id);
+            _context.Tecnicos.Remove(tecnicos);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
-        private bool AnalisesExists(int id)
+        private bool TecnicosExists(int id)
         {
-            return _context.Analises.Any(e => e.Id == id);
+            return _context.Tecnicos.Any(e => e.Id == id);
         }
     }
 }

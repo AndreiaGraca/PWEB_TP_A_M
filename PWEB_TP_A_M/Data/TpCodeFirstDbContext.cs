@@ -20,5 +20,8 @@ namespace PWEB_TP_A_M.Data
         public DbSet<Localizacoes> Localizacoes { get; set; }
         public DbSet<Tecnicos> Tecnicos { get; set; }
         public DbSet<PWEB_TP_A_M.Models.Analises> Analises { get; set; }
+        public DbSet<PWEB_TP_A_M.Models.Agendamento> Agendamento { get; set; }
+        public DbSet<PWEB_TP_A_M.Models.Clientes> Clientes { get; set; }
+        public DbSet<PWEB_TP_A_M.Models.Testes> Testes { get; set; }
     }
 }

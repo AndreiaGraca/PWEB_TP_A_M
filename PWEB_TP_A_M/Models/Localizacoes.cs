@@ -8,8 +8,8 @@ namespace PWEB_TP_A_M.Models
     public class Localizacoes
     {
         public int Id { get; set; }
-        public String Local { get; set; }
-        public String Codigo_Postal { get; set; }
+        public string Distrito { get; set; }
+        public string Localidade { get; set; }
     }
 
    

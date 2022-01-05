@@ -48,7 +48,8 @@ namespace PWEB_TP_A_M.Controllers
         // GET: CentroTeste/Create
         public IActionResult Create()
         {
-            ViewData["AnalisesId"] = new SelectList(_context.Analises, "Id", "Tipo");
+            ViewData["AnalisesId"] = new SelectList(_context.Analises, "Id", "NomeAnalise");
+            ViewData["LocalizacoesId"] = new SelectList(_context.Localizacoes, "Id", "Id");
             return View();
         }
 

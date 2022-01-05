@@ -1,24 +1,26 @@
-﻿@model IEnumerable<PWEB_TP_A_M.Models.Localizacoes>
+﻿@model IEnumerable<PWEB_TP_A_M.Models.Tecnicos>
 
 @{
     ViewData["Title"] = "Index";
 }
 
-
 <a class="text-black">
-    <h3>Localidades</h3>
+    <h3>Tecnicos</h3>
 </a>
 <p>
-    <a asp-action="Create" style="color:cyan-black">Criar nova localidade</a>
+    <a asp-action="Create" style="color:cyan-black">Criar novo agendamento</a>
 </p>
 <table class="table table-bordered">
     <thead class="border-1 table-bordered text-black-50" style="background-color:#98bac6">
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.Distrito)
+                @Html.DisplayNameFor(model => model.Nome)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Localidade)
+                @Html.DisplayNameFor(model => model.Especialidade)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IdAgendamento)
             </th>
             <th></th>
         </tr>
@@ -28,10 +30,13 @@
         {
 <tr>
     <td>
-        @Html.DisplayFor(modelItem => item.Distrito)
+        @Html.DisplayFor(modelItem => item.Nome)
     </td>
     <td>
-        @Html.DisplayFor(modelItem => item.Localidade)
+        @Html.DisplayFor(modelItem => item.Especialidade)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.IdAgendamento)
     </td>
     <td>
         <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
@@ -41,3 +46,4 @@
 </tr>}
     </tbody>
 </table>
+

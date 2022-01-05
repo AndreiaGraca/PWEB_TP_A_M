@@ -10,49 +10,95 @@
 <body>
     <header>
 
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light  border-bottom box-shadow mb-3" style="background-color: #6399ab">
+
+            @*<div class="container">
+        <div>
+            <img src="images\Logo1.PNG" alt="Logo" width="50" height="50">
+        </div>
+        <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">Laboratório A&M</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>*@
+
             <div class="container">
-                <div>
-                    <img src="images\Logo1.PNG" alt="Logo" width="50" height="50">
-                </div>
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">Laboratório A&M</a>
+                <img src="C:\Users\ASUS\Documents\PWEB_TP_A_M\PWEB_TP_A_M\Views\Shared\Logo1.PNG"  alt="Logo" width="50" height="50">
+                <a class="navbar-brand text-black-50" asp-area="" asp-controller="Home" asp-action="Index">Laboratório A&M</a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
 
-
                 <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
+
                     <ul class="navbar-nav flex-grow-1" id="navbar">
 
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index" onmouseover="myFunction(this)" onmouseout="myFunctionAA(this)">Home</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="CentroTeste" asp-action="Index" onmouseover="myFunction(this)" onmouseout="myFunctionAA(this)">CentroTeste</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Analise" asp-action="Index" onmouseover="myFunction(this)" onmouseout="myFunctionAA(this)">Analises</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Localizacao" asp-action="Index" onmouseover="myFunction(this)" onmouseout="myFunctionAA(this)">Localizações</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Analise" asp-action="Index" onmouseover="myFunction(this)" onmouseout="myFunctionAA(this)">Contactos</a>
-                        </li>
 
-                        <script>
-                            function myFunction(x) {
-                                x.style.background = "SteelBlue";
+                        @*<li class="nav-item">
+                    <a class="nav-link text-dark" asp-area="" asp-controller="CentroTeste" asp-action="Index" onmouseover="myFunction(this)" onmouseout="myFunctionAA(this)">CentroTeste</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-dark" asp-area="" asp-controller="Analise" asp-action="Index" onmouseover="myFunction(this)" onmouseout="myFunctionAA(this)">Analises</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-dark" asp-area="" asp-controller="Localizacao" asp-action="Index" onmouseover="myFunction(this)" onmouseout="myFunctionAA(this)">Localizações</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-dark" asp-area="" asp-controller="Analise" asp-action="Index" onmouseover="myFunction(this)" onmouseout="myFunctionAA(this)">Contactos</a>
+                </li>*@
 
-                            }
+                        <ul class="navbar-nav flex-grow-1">
+                            <li class="nav-item">
+                                @*<a class="nav-link text-white" asp-area="" asp-controller="Agendamentoes" asp-action="Index">Agendamento</a>*@
 
-                            function myFunctionAA(x) {
-                                x.style.background = "white";
-                            }
-                        </script>
-                    </ul>
-                    <partial name="_LoginPartial" />
+                                <div class="dropdown">
+                                    <button type="button" class="btn btn-secondary  dropdown-toggle border-0" id="dropdownMenuOffset" style="background-color: #6399ab" data-toggle="dropdown" aria-expanded="false">
+                                        Marcações
+                                    </button>
+                                    <div class="dropdown-menu" aria-labelledby="dropdownMenuOffset">
+                                        <a class="dropdown-item" asp-controller="Agendamento" asp-action="Index">Agendamentos</a>
+                                        <a class="dropdown-item" asp-controller="Teste" asp-action="Index">Testes</a>
+                                        <a class="dropdown-item" asp-controller="Analise" asp-action="Index">Análises</a>
+                                    </div>
+                                </div>
+                            </li>
+                            <li class="nav-item">
+                                @*<a class="nav-link text-white" asp-area="" asp-controller="Centros" asp-action="Index">Laboratórios</a>*@
+                                <div class="dropdown">
+                                    <button type="button" class="btn btn-secondary dropdown-toggle border-0" id="dropdownMenuOffset" data-toggle="dropdown" style="background-color: #6399ab " aria-expanded="false">
+                                        Onde estamos?
+                                    </button>
+                                    <div class="dropdown-menu" aria-labelledby="dropdownMenuOffset">
+                                        <a class="dropdown-item" asp-controller="CentroTeste" asp-action="Index">Laboratórios</a>
+                                        <a class="dropdown-item" asp-controller="Localizacao" asp-action="Index">Localidades</a>
+                                    </div>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="dropdown">
+                                    <button type="button" class="btn btn-secondary  dropdown-toggle border-0" id="dropdownMenuOffset" style="background-color: #6399ab" data-toggle="dropdown" aria-expanded="false">
+                                        Zona Utilizadores
+                                    </button>
+                                    <div class="dropdown-menu" aria-labelledby="dropdownMenuOffset">
+                                        <a class="dropdown-item" asp-controller="Clientes" asp-action="Index">Clientes</a>
+                                        <a class="dropdown-item" asp-controller="Tecnicos" asp-action="Index">Técnicos</a>
+                                    </div>
+                                </div>
+                            </li>
+
+                            <script>
+                                function myFunction(x) {
+                                    x.style.background = "SteelBlue";
+
+                                }
+
+                                function myFunctionAA(x) {
+                                    x.style.background = "white";
+                                }
+                            </script>
+                        </ul>
+                        <partial name="_LoginPartial" />
                 </div>
             </div>
         </nav>

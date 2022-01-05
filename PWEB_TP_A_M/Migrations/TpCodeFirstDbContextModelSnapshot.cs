@@ -26,12 +26,58 @@ namespace PWEB_TP_A_M.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<int>("CentrosTesteId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("ClientesId")
+                        .HasColumnType("int");
+
                     b.Property<string>("Laboratorios")
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
+                    b.HasIndex("CentrosTesteId");
+
+                    b.HasIndex("ClientesId");
+
                     b.ToTable("Administracao");
+                });
+
+            modelBuilder.Entity("PWEB_TP_A_M.Models.Agendamento", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("AnaliseId")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("AnalisesId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("CentroId")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("CentrosId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("TestesId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("TipoAgendamentoNo")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("AnalisesId");
+
+                    b.HasIndex("CentrosId");
+
+                    b.HasIndex("TestesId");
+
+                    b.ToTable("Agendamento");
                 });
 
             modelBuilder.Entity("PWEB_TP_A_M.Models.Analises", b =>
@@ -41,7 +87,13 @@ namespace PWEB_TP_A_M.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("Tipo")
+                    b.Property<string>("NomeAnalise")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Resultados")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("TipoAnalise")
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
@@ -100,6 +152,35 @@ namespace PWEB_TP_A_M.Migrations
                     b.ToTable("CentroTeste");
                 });
 
+            modelBuilder.Entity("PWEB_TP_A_M.Models.Clientes", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int?>("AgendamentoId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("BI")
+                        .HasColumnType("int");
+
+                    b.Property<int>("IdAgendamento")
+                        .HasColumnType("int");
+
+                    b.Property<int>("NIF")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Nome")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("AgendamentoId");
+
+                    b.ToTable("Clientes");
+                });
+
             modelBuilder.Entity("PWEB_TP_A_M.Models.Gestores", b =>
                 {
                     b.Property<int>("Id")
@@ -130,10 +211,10 @@ namespace PWEB_TP_A_M.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("Codigo_Postal")
+                    b.Property<string>("Distrito")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Local")
+                    b.Property<string>("Localidade")
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
@@ -148,12 +229,86 @@ namespace PWEB_TP_A_M.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<int?>("AgendamentoId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Especialidade")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("IdAgendamento")
+                        .HasColumnType("int");
+
                     b.Property<string>("Nome")
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
+                    b.HasIndex("AgendamentoId");
+
                     b.ToTable("Tecnicos");
+                });
+
+            modelBuilder.Entity("PWEB_TP_A_M.Models.Testes", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("NomeTeste")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("Resultado")
+                        .HasColumnType("int");
+
+                    b.Property<string>("TipoTeste")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Testes");
+                });
+
+            modelBuilder.Entity("PWEB_TP_A_M.Models.Administracao", b =>
+                {
+                    b.HasOne("PWEB_TP_A_M.Models.CentroTeste", "CentrosTeste")
+                        .WithMany()
+                        .HasForeignKey("CentrosTesteId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("PWEB_TP_A_M.Models.Clientes", "Clientes")
+                        .WithMany()
+                        .HasForeignKey("ClientesId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("CentrosTeste");
+
+                    b.Navigation("Clientes");
+                });
+
+            modelBuilder.Entity("PWEB_TP_A_M.Models.Agendamento", b =>
+                {
+                    b.HasOne("PWEB_TP_A_M.Models.Analises", "Analises")
+                        .WithMany()
+                        .HasForeignKey("AnalisesId");
+
+                    b.HasOne("PWEB_TP_A_M.Models.CentroTeste", "Centros")
+                        .WithMany()
+                        .HasForeignKey("CentrosId");
+
+                    b.HasOne("PWEB_TP_A_M.Models.Testes", "Testes")
+                        .WithMany()
+                        .HasForeignKey("TestesId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Analises");
+
+                    b.Navigation("Centros");
+
+                    b.Navigation("Testes");
                 });
 
             modelBuilder.Entity("PWEB_TP_A_M.Models.CentroTeste", b =>
@@ -179,6 +334,15 @@ namespace PWEB_TP_A_M.Migrations
                     b.Navigation("Tecnicos");
                 });
 
+            modelBuilder.Entity("PWEB_TP_A_M.Models.Clientes", b =>
+                {
+                    b.HasOne("PWEB_TP_A_M.Models.Agendamento", "Agendamento")
+                        .WithMany()
+                        .HasForeignKey("AgendamentoId");
+
+                    b.Navigation("Agendamento");
+                });
+
             modelBuilder.Entity("PWEB_TP_A_M.Models.Gestores", b =>
                 {
                     b.HasOne("PWEB_TP_A_M.Models.CentroTeste", "CentroTeste")
@@ -186,6 +350,15 @@ namespace PWEB_TP_A_M.Migrations
                         .HasForeignKey("CentroTesteId");
 
                     b.Navigation("CentroTeste");
+                });
+
+            modelBuilder.Entity("PWEB_TP_A_M.Models.Tecnicos", b =>
+                {
+                    b.HasOne("PWEB_TP_A_M.Models.Agendamento", "Agendamento")
+                        .WithMany()
+                        .HasForeignKey("AgendamentoId");
+
+                    b.Navigation("Agendamento");
                 });
 #pragma warning restore 612, 618
         }

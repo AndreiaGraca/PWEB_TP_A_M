@@ -1,26 +1,29 @@
-﻿@model IEnumerable<PWEB_TP_A_M.Models.Analises>
+﻿@model IEnumerable<PWEB_TP_A_M.Models.Clientes>
 
 @{
     ViewData["Title"] = "Index";
 }
 
 <a class="text-black">
-    <h3>Analises</h3>
+    <h3>Clientes</h3>
 </a>
 <p>
-    <a asp-action="Create" style="color:cyan-black">Criar nova analise</a>
+    <a asp-action="Create" style="color:cyan-black">Criar novo cliente</a>
 </p>
 <table class="table table-bordered">
     <thead class="border-1 table-bordered text-black-50" style="background-color:#98bac6">
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.TipoAnalise)
+                @Html.DisplayNameFor(model => model.Nome)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.NomeAnalise)
+                @Html.DisplayNameFor(model => model.BI)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Resultados)
+                @Html.DisplayNameFor(model => model.NIF)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IdAgendamento)
             </th>
             <th></th>
         </tr>
@@ -30,13 +33,16 @@
         {
 <tr>
     <td>
-        @Html.DisplayFor(modelItem => item.TipoAnalise)
+        @Html.DisplayFor(modelItem => item.Nome)
     </td>
     <td>
-        @Html.DisplayFor(modelItem => item.NomeAnalise)
+        @Html.DisplayFor(modelItem => item.BI)
     </td>
     <td>
-        @Html.DisplayFor(modelItem => item.Resultados)
+        @Html.DisplayFor(modelItem => item.NIF)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.Agendamento.TipoAgendamentoNo)
     </td>
     <td>
         <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |

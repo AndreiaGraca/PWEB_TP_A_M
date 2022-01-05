@@ -1,0 +1,152 @@
+﻿@model IEnumerable<PWEB_TP_A_M.Models.Agendamento>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+
+<a class="text-black">
+    <h3>Agendamentos</h3>
+</a>
+<p>
+    <a asp-action="Create" style="color:cyan-black">Criar novo agendamento</a>
+</p>
+
+<div class="dropdown float-lg-right">
+    <button type="button" class="btn btn-secondary dropdown-toggle border-0" id="dropdownMenuOffset" data-toggle="dropdown" style="background-color: #6399ab " aria-expanded="false">
+        Onde estamos?
+    </button>
+    <div class="dropdown-menu" aria-labelledby="dropdownMenuOffset">
+        <a class="dropdown-item">
+            <form asp-controller="Agendamento" asp-action="Index" method="get" class="float-right">
+                <b>Filtrar por tipo de teste:</b>
+
+                <select name="Id" asp-items="ViewBag.TestesId"></select>
+
+                <input type="submit" value="Filtrar" class="btn btn-sm btn-secondary" style="background-color: #6399ab" />
+
+            </form>
+
+        </a>
+
+
+        <a class="dropdown-item">
+            <form asp-controller="Agendamento" asp-action="Index" method="get" class="float-right">
+                <b>Filtrar por tipo de Analise:</b>
+                <select name="Id" asp-items="ViewBag.AnalisesId"></select>
+                <input type="submit" value="Filtrar" class="btn btn-secondary btn-sm" style="background-color: #6399ab" />
+            </form>
+
+        </a>
+
+        <a class="dropdown-item">
+            <form asp-controller="Agendamento" asp-action="Index" method="get" class="float-right">
+                <b>Filtrar por Laboratório:</b>
+                <select name="Id" asp-items="ViewBag.CentroId"></select>
+                <input type="submit" value="Filtrar" class="btn btn-secondary btn-sm" style="background-color: #6399ab" />
+            </form>
+        </a>
+    </div>
+</div>
+
+
+
+@*
+     <form asp-controller="Agendamentoes" asp-action="Index" method="get"  class="float-right">
+       <b>Filtrar por tipo de teste:</b>
+
+            <select name="Id" asp-items="ViewBag.TestesId"></select>
+
+             <input type="submit" value="Filtrar" class="btn btn-sm btn-secondary"  style="background-color: #6399ab" />
+
+         </form>
+
+            <pre>
+
+         </pre>
+
+    <form asp-controller="Agendamentoes" asp-action="Index" method="get" class="float-right">
+       <b>Filtrar por tipo de Analise:</b>
+            <select name="Id" asp-items="ViewBag.AnalisesId"></select>
+             <input type="submit" value="Filtrar" class="btn btn-secondary btn-sm" style="background-color: #6399ab"/>
+         </form>
+
+         <pre>
+
+         </pre>
+    <form asp-controller="Agendamentoes" asp-action="Index" method="get" class="float-right" >
+       <b>Filtrar por Laboratório:</b>
+            <select name="Id" asp-items="ViewBag.CentroId" ></select>
+             <input type="submit" value="Filtrar" class="btn btn-secondary btn-sm" style="background-color: #6399ab"/>
+         </form>
+*@
+
+
+<form class="form-inline border-dark " asp-controller="Agendamentoes" asp-action="Search">
+
+    <input type="text" name="procura" placeholder="Procura?" class="form-control border-0 bg-light">
+
+    <button id="button-addon1" type="submit" class="btn btn-link text-primary ">  </button>
+
+</form>
+
+<pre>
+    
+</pre>
+
+
+
+<table class="table table-bordered">
+
+    <thead class="border-1 table-bordered text-black-50" style="background-color:#98bac6">
+
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.TipoAgendamentoNo)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Centros.Nome)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Testes.NomeTeste)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Analises.NomeAnalise)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TipoAgendamentoNo)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Centros.Nome)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Testes.NomeTeste)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.AnaliseId)
+                </td>
+                <td>
+
+                    <div class="btn-group " role="group">
+                        <button id="btnGroupDrop1" type="button" class="btn btn-secondary dropdown-toggle btn-sm" data-toggle="dropdown" aria-expanded="false" style="background-color: #6399ab">
+                            Opções
+                        </button>
+                        <div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
+                            <a class="dropdown-item" asp-action="Edit" asp-route-id="@item.Id">Editar</a>
+                            <a class="dropdown-item" asp-action="Details" asp-route-id="@item.Id">Detalhes Agendamento</a>
+                            <a class="dropdown-item" asp-action="Delete" asp-route-id="@item.Id">Apagar Agendamento</a>
+                        </div>
+                    </div>
+
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
